@@ -18,3 +18,11 @@ def addItem():
 	db.session.addItem(todo)
 	db.session.commit()
 	return redirect(url_for('index'))
+
+
+@app.route('/complete/<id>')
+def complete(id):
+    todo = Todo.query.filter_by(id=int(id)).first()
+    todo.complete = True
+    db.session.commit()
+    return redirect(url_for('index'))
